@@ -4,6 +4,7 @@ x = symbols('x')
 from sympy import Derivative
 
 import os
+import platform
 import random
 import operator as op
 
@@ -37,13 +38,13 @@ def opkey():
     return op_key
 
 
-#===================================================================================#
+
 #main menu
-def mainmenu():
-    print("Answer calculus topics:\n\t1. Differentiation\n\t2. Integral\n")
+def main():
     print("More actions: \n\t3. Settings\n\t4. View score history\n\t5. Exit")
+    print("Answer calculus topics:\n\t1. Differentiation\n\t2. Integral\n")
     ques_type = input("\nChoose the number of what you want to do: ")
-    os.system("cls")
+    os.system(clear)
     #loop if input not 1-3
     while ques_type != "5":
         if ques_type == "1":
@@ -59,9 +60,9 @@ def mainmenu():
         print("Calculus topics:\n\t1. Differentiation\n\t2. Integral\n")
         print("More actions: \n\t3. Settings\n\t4. View score history\n\t5. Exit")
         ques_type = input("\nChoose the number of what you want to do: ")
-        os.system("cls")
+        os.system(clear)
 
-#===================================================================================#
+
 
 # to add more terms
 def addterm(term, n):
@@ -96,7 +97,7 @@ def addterm(term, n):
         polyn = rand_ops[opkey()](polyn, terms[4])
     return polyn
 
-#===================================================================================#
+
 
 # to create a polynomial function
 # deg is the highest degree of the polynomial function
@@ -113,14 +114,14 @@ def polynomial(deg):
 
 
 
-#===================================================================================#
+
 
 
 # question generator
 # calculus is whether Derivative or Integral
 # solve is diff or integrate
 def question(calculus, solve):
-    os.system("cls")
+    os.system(clear)
     print('Function types:')         
 
     #print all function type in the list
@@ -128,7 +129,7 @@ def question(calculus, solve):
         print(f'\t{b}. {a}')
     print('\t4. All function types\n\t5. Back')
     ftype = input("Choose a function type: ")
-    os.system("cls")
+    os.system(clear)
 
     rightorwrong = []
 
@@ -160,10 +161,10 @@ def question(calculus, solve):
                     break
                 
                 rightorwrong.append(choice)                                                     
-                os.system("cls")
+                os.system(clear)
 
             scorerecord(rightorwrong, calculus)
-            os.system("cls")
+            os.system(clear)
 
         # all question are natural log
         elif ftype =="2":
@@ -193,10 +194,10 @@ def question(calculus, solve):
                     break
                 
                 rightorwrong.append(choice)                                                     
-                os.system("cls")
+                os.system(clear)
 
             scorerecord(rightorwrong, calculus)
-            os.system("cls")
+            os.system(clear)
 
         #all questions are natural exponential
         elif ftype =="3":
@@ -225,10 +226,10 @@ def question(calculus, solve):
                     break
                 
                 rightorwrong.append(choice)                                                     
-                os.system("cls")
+                os.system(clear)
 
             scorerecord(rightorwrong, calculus)
-            os.system("cls")
+            os.system(clear)
 
         # all function types
         elif ftype =="4":
@@ -273,10 +274,10 @@ def question(calculus, solve):
                     break
                 
                 rightorwrong.append(choice)                                                     
-                os.system("cls")
+                os.system(clear)
 
             scorerecord(rightorwrong, calculus)
-            os.system("cls")
+            os.system(clear)
 
         else:
             print("Invalid input!")
@@ -287,10 +288,10 @@ def question(calculus, solve):
             print(f'\t{b}. {a}')
         print('\t4. All function types\n\t5. Back')
         ftype = input("Choose a function type: ")
-        os.system("cls")
+        os.system(clear)
         
 
-#===================================================================================#
+
 
 #question is the equation the prgram created
 #solve is whether its differentiation or integral
@@ -331,7 +332,7 @@ def choices(question, solve):
             u_ans = input(f"\nType 'back' to return text\nEnter the letter of your answer: ").lower()
     return u_ans
             
-#===================================================================================#
+
 
 #checking if the answer is correct
 def answer(ans, anss, u_ans):
@@ -349,7 +350,7 @@ def answer(ans, anss, u_ans):
     return check
     
 
-#===================================================================================#
+
 
 #score recorder
 #r_or_w is the list where the user got corrrect and incorrect
@@ -392,33 +393,33 @@ def scorerecord(r_or_w,calculus):
     
 
 
-#===================================================================================#
+
 
 def settings():
     print("Welcome to settings!")
     print("1. Clear score history.\n2. Change difficulty.\n3. Change number of questions.\n4. Back")
     setting = input("Choose the number of what action you want:  ")
-    os.system("cls")
+    os.system(clear)
     while setting != "4":
 
         #clear the score history
         if setting == "1":
             choose = input("Clear history:\n1. Differentiation\n2. Integral\n3. Both\n4. Cancel\nWhat do you want to clear?  ")   
-            os.system("cls")         
+            os.system(clear)         
             while choose !="4":
                 if choose == "1":
                     diff_total = {}
                     with open('diff_scores.pickle', 'wb') as p:
                         pickle.dump(diff_total, p)
                     back = input("Score history cleared.\nPress enter to back.")
-                    os.system("cls")
+                    os.system(clear)
 
                 elif choose == "2":
                     integ_total = {}
                     with open('integ_scores.pickle', 'wb') as p:
                         pickle.dump(integ_total, p)
                     back = input("Score history cleared.\nPress enter to back.")
-                    os.system("cls")
+                    os.system(clear)
 
                 elif choose =="3": 
                     diff_total = {}
@@ -428,18 +429,18 @@ def settings():
                     with open('integ_scores.pickle', 'wb') as p:
                         pickle.dump(integ_total, p)
                     back = input("Score history cleared.\nPress enter to back.")
-                    os.system("cls")
+                    os.system(clear)
 
                 else: 
                     print("Input invalid!")
                 choose = input("Clear history:\n1. Differentiation\n2. Integral\n3. Both\n4. Cancel\nWhat do you want to clear?  ")
-                os.system("cls")
+                os.system(clear)
 
         #changing difficulty
         elif setting =="2":
             print("Change difficulty:\n\t1. Easy\n\t2. Medium (default)\n\t3. Hard\n\t4. Back")
             difficult = input("Choose new difficulty: ")
-            os.system("cls")
+            os.system(clear)
 
             while difficult != "4":
                 if difficult =="1":
@@ -447,39 +448,39 @@ def settings():
                     difficulty.update({"Easy": 3})
                     print("Difficulty successfully updated to 'Easy'.")
                     back = input("Enter to back.")
-                    os.system("cls")
+                    os.system(clear)
                 elif difficult =="2":
                     difficulty.clear()
                     difficulty.update({"Medium (default)": 5})
                     print("Difficulty successfully updated to 'Medium (Default)'")
                     back = input("Enter to back.")
-                    os.system("cls")
+                    os.system(clear)
                 elif difficult == "3":
                     difficulty.clear()
                     difficulty.update({"Hard": 7})
                     print("Difficulty successfully updated to 'Hard'")
                     back = input("Enter to back.")
-                    os.system("cls")
+                    os.system(clear)
                 else:
-                    os.system("cls")
+                    os.system(clear)
                     print("Input invalid.")
                 print("Change difficulty:\n\t1. Easy\n\t2. Medium (default)\n\t3. Hard\n\t4. Back")
                 difficult = input("Choose new difficulty: ")
-                os.system("cls")
+                os.system(clear)
 
         #change how many questions 
         elif setting == "3":
             print("Change number of questions\n\t1. 5 items\n\t2. 10 items (default)\n\t3. 15 items\n\t4. 20 items\n\t5. Custom\n\t6. Back")
             number = input("Choose how many items you want to answer:  ")
             while not number.isdigit():
-                os.system("cls")    
+                os.system(clear)    
                 print("Input invalid.")
                 print("Change number of questions\n\t1. 5 items\n\t2. 10 items (default)\n\t3. 15 items\n\t4. 20 items\n\t5. Custom\n\t6. Back")
                 number = input("Choose how many items you want to answer:  ")
             quesnumber[0] = int(number) *5
             print(f"Number of questions successfully changed to {quesnumber[0]} items.")
             back = input("Press enter to back.")
-            os.system("cls")
+            os.system(clear)
 
         else:
             print("Input not valid.\n")
@@ -487,13 +488,12 @@ def settings():
         print("Welcome to settings!")
         print("1. Clear score history.\n2. Change difficulty.\n3. Change number of questions.\n4. Back")
         setting = input("Choose the number of what action you want:  ")
-        os.system("cls")
+        os.system(clear)
 
-#===================================================================================#
 def viewscores():
     print("1. Derivative\n2. Integral\n3. Back")
     view = input("What score history do you want to see?  ")
-    os.system("cls")
+    os.system(clear)
     while view != "3":
         if view == "1":
             print("Viewing differentiation score history:")
@@ -503,7 +503,7 @@ def viewscores():
             for a,b in zip(reversed(list(diff_total.keys())), reversed(list(diff_total.values()))):
                 print(f'{a} -- Score: {b}')
             done = input()
-            os.system("cls")
+            os.system(clear)
         elif view == "2":
             print("Viewing integrtion score history:")
             with open('integ_scores.pickle', 'rb') as p:
@@ -512,16 +512,18 @@ def viewscores():
             for a,b in zip(reversed(list(integ_total.keys())), reversed(list(integ_total.values()))):
                 print(f'{a} -- Score: {b}')
             done = input()
-            os.system("cls")
+            os.system(clear)
         else: 
             print("Input Invalid.")
         print("1. Derivative\n2. Integral\n3. Back")
         view = input("What score history do you want to see?  ")
-        os.system("cls")
+        os.system(clear)
 
-#===================================================================================#
+if __name__=="__main__":
+    user_os = platform.system()
+    clear = "cls"
 
+    if user_os == "Linux":
+        clear = "clear"
 
-mainmenu()
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+    main()
