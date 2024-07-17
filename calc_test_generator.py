@@ -1,132 +1,93 @@
 from __future__ import division
-from sympy import *
-x = symbols('x')
-from sympy import Derivative
 
 import os
 import platform
 import random
 import operator as op
-
-from datetime import date
-from datetime import datetime
-
 import pickle
-
-difficulty = {"Medium (default)" : 5}
-quesnumber = [10]
-
-diff_total = {}
-integ_total = {}
-
-##with open("diff_scores.pickle", 'wb') as p:
-##    pickle.dump(diff_total, p)
-##
-##with open("integ_scores.pickle", 'wb') as p:
-##    pickle.dump(integ_total, p)
-    
-
-#dictionary for function types
-funct_type = ["Polynomial", "Natural Logarithm", "Natural Exponent"]
-
-#dictionary for + and -
-rand_ops = {"+": op.add, "-": op.sub}
-
-#this is to choose between the string + and - randomly. then turns it to an operation
-def opkey():
-    op_key = random.choice(list(rand_ops.keys()))
-    return op_key
+from datetime import datetime
+from sympy import Derivative, Integral, diff, integrate, symbols, opkey
 
 
-
-#main menu
 def main():
-    print("More actions: \n\t3. Settings\n\t4. View score history\n\t5. Exit")
-    print("Answer calculus topics:\n\t1. Differentiation\n\t2. Integral\n")
+    menu = """
+Answer calculus topics:
+    1. Differentiation
+    2. Integral
+More actions:
+    3. Settings
+    4. View score history
+    5. Exit
+"""
+    print(menu)
+
     ques_type = input("\nChoose the number of what you want to do: ")
-    os.system(clear)
-    #loop if input not 1-3
+
     while ques_type != "5":
+        os.system(clear)
         if ques_type == "1":
             question(Derivative, diff)
         elif ques_type == "2":
             question(Integral, integrate)
-        elif ques_type =="3":
+        elif ques_type == "3":
             settings()
-        elif ques_type =="4":
+        elif ques_type == "4":
             viewscores()
         else:
             print("Input invalid!")
-        print("Calculus topics:\n\t1. Differentiation\n\t2. Integral\n")
-        print("More actions: \n\t3. Settings\n\t4. View score history\n\t5. Exit")
-        ques_type = input("\nChoose the number of what you want to do: ")
-        os.system(clear)
 
+        print(menu)
+        ques_type = input("\nChoose the number of what you want to do: ")
 
 
 # to add more terms
 def addterm(term, n):
     terms = [term]
-    # if the degree of the first term (n) is greater than 1, it adds more term that
-    #   ~have a lower degree than the first term until n = 1
     while n > 1:
-        k = random.randint(1,10)
+        k = random.randint(1, 10)
         n = random.randint(1, n - 1)
         term = k*x**n
         terms.append(term)
     if len(terms) == 1:
         polyn = terms[0]
 
-    #if there are more than 1 term, the random operation will be used 
+    # if there are more than 1 term, the random operation will be used
     elif len(terms) == 2:
-        polyn = rand_ops[opkey()](terms[0],terms[1])
+        polyn = rand_ops[opkey()](terms[0], terms[1])
 
     elif len(terms) == 3:
-        polyn = rand_ops[opkey()](terms[0],terms[1])
-        polyn = rand_ops[opkey()](polyn,terms[2])
-        
+        polyn = rand_ops[opkey()](terms[0], terms[1])
+        polyn = rand_ops[opkey()](polyn, terms[2])
+
     elif len(terms) == 4:
-        polyn = rand_ops[opkey()](terms[0],terms[1])
+        polyn = rand_ops[opkey()](terms[0], terms[1])
         polyn = rand_ops[opkey()](polyn, terms[2])
         polyn = rand_ops[opkey()](polyn, terms[3])
-        
+
     elif len(terms) == 5:
-        polyn = rand_ops[opkey()](terms[0],terms[1])
+        polyn = rand_ops[opkey()](terms[0], terms[1])
         polyn = rand_ops[opkey()](polyn, terms[2])
         polyn = rand_ops[opkey()](polyn, terms[3])
         polyn = rand_ops[opkey()](polyn, terms[4])
+
     return polyn
 
 
-
-# to create a polynomial function
-# deg is the highest degree of the polynomial function
 def polynomial(deg):
-
-    #choose a random number for the degree of a term and coefficient
-    k = random.randint(1,10)
-    n = random.randint(1,deg)
+    k = random.randint(1, 10)
+    n = random.randint(1, deg)
     term = k*x**n
 
-    #call the function that creates another term         
+    # call the function that creates another term
     polyn = addterm(term, n)
     return polyn
 
-
-
-
-
-
-# question generator
-# calculus is whether Derivative or Integral
-# solve is diff or integrate
 def question(calculus, solve):
-    os.system(clear)
     print('Function types:')         
 
-    #print all function type in the list
     for a,b in zip(funct_type, range(1,4)):
-        print(f'\t{b}. {a}')
+        print(f'\t{b}. {a[:1].upper() + a[1:]}')
+
     print('\t4. All function types\n\t5. Back')
     ftype = input("Choose a function type: ")
     os.system(clear)
@@ -519,11 +480,26 @@ def viewscores():
         view = input("What score history do you want to see?  ")
         os.system(clear)
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
+    x = symbols('x')
+
     user_os = platform.system()
     clear = "cls"
 
     if user_os == "Linux":
         clear = "clear"
+
+    difficulty = {"medium (default)" : 5}
+    quesnumber = [10]
+
+    diff_total = {}
+    integ_total = {}
+
+    #dictionary for function types
+    funct_type = ["polynomial", "natural logarithm", "natural exponent"]
+
+    #dictionary for + and -
+    rand_ops = {"+": op.add, "-": op.sub}
 
     main()
