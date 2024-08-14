@@ -1,3 +1,3 @@
-## Rewriting my year 12 project
+## My year 12 project
 
 A calculus multiple choice question generator
