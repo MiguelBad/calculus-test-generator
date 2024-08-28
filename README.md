@@ -1,3 +1,3 @@
 ## My year 12 project
 
-A calculus multiple choice question generator
+A cli calculus multiple choice question generator
