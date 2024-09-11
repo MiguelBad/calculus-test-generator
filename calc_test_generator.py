@@ -543,5 +543,3 @@ if __name__ == "__main__":
 
     # dictionary for + and -
     rand_ops = {"+": op.add, "-": op.sub}
-
-    main()
