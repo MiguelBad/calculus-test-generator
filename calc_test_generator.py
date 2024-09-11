@@ -91,12 +91,12 @@ def polynomial(deg):
 
 
 def question(calculus, solve):
-    print('Function types:')
+    print("Function types:")
 
     for a, b in zip(funct_type, range(1, 4)):
-        print(f'\t{b}. {a[:1].upper() + a[1:]}')
+        print(f"\t{b}. {a[:1].upper() + a[1:]}")
 
-    print('\t4. All function types\n\t5. Back')
+    print("\t4. All function types\n\t5. Back")
     ftype = input("Choose a function type: ")
     os.system(clear)
 
@@ -107,13 +107,13 @@ def question(calculus, solve):
 
     # loop if input not in the option
     while ftype != "5":
-
         # all questions are polynomial
         if ftype == "1":
-
             # using for loop to create 10 questions
             for i in range(1, quesnumber[0] + 1):
-                print(f"Difficulty: {difficultylevel}\nChosen function type: {funct_type[int(ftype) - 1]} Function")
+                print(
+                    f"Difficulty: {difficultylevel}\nChosen function type: {funct_type[int(ftype) - 1]} Function"
+                )
 
                 # calls the function that creates polynomial
                 ques = polynomial(n)
@@ -137,11 +137,14 @@ def question(calculus, solve):
 
         # all question are natural log
         elif ftype == "2":
-
             # using for loop to create 10 questions
             for i in range(1, quesnumber[0] + 1):
-                print(f"Difficulty: {difficultylevel}\nChosen function type: {funct_type[int(ftype) - 1]} Function")
-                print("\nNote: In Python, 'log' is the natural logarithm, hence ln =log\n")
+                print(
+                    f"Difficulty: {difficultylevel}\nChosen function type: {funct_type[int(ftype) - 1]} Function"
+                )
+                print(
+                    "\nNote: In Python, 'log' is the natural logarithm, hence ln =log\n"
+                )
 
                 # creates a polynomial to be placed inside ln function
                 polyn = polynomial(n - 2)
@@ -170,10 +173,11 @@ def question(calculus, solve):
 
         # all questions are natural exponential
         elif ftype == "3":
-
             # using for loop to create 10 questions
             for i in range(1, quesnumber[0] + 1):
-                print(f"Difficulty: {difficultylevel}\nChosen function type: {funct_type[int(ftype) - 1]} Function")
+                print(
+                    f"Difficulty: {difficultylevel}\nChosen function type: {funct_type[int(ftype) - 1]} Function"
+                )
 
                 # creates a polynomial to be placed on exponential function
                 polyn = polynomial(n - 2)
@@ -205,13 +209,17 @@ def question(calculus, solve):
             for i in range(1, quesnumber[0] + 1):
                 ftype = random.choice(funct_type)
                 if ftype == funct_type[0]:
-                    print(f"Difficulty: {difficultylevel}\nChosen function type: {ftype} Function")
+                    print(
+                        f"Difficulty: {difficultylevel}\nChosen function type: {ftype} Function"
+                    )
 
                     # calls the function that creates polynomial
                     q = polynomial(n)
 
                 elif ftype == funct_type[1]:
-                    print(f"Difficulty: {difficultylevel}\nChosen function type: {ftype} Function")
+                    print(
+                        f"Difficulty: {difficultylevel}\nChosen function type: {ftype} Function"
+                    )
 
                     # creates a polynomial to be placed inside ln function
                     polyn = polynomial(n - 2)
@@ -222,7 +230,9 @@ def question(calculus, solve):
                     q = k1 * x**n1 * math.ln(polyn)
 
                 elif ftype == funct_type[2]:
-                    print(f"Difficulty: {difficultylevel}\nFunction type: {ftype} Function")
+                    print(
+                        f"Difficulty: {difficultylevel}\nFunction type: {ftype} Function"
+                    )
 
                     # creates a polynomial to be placed on exponential function
                     polyn = polynomial(n - 2)
@@ -250,12 +260,12 @@ def question(calculus, solve):
 
         else:
             print("Invalid input!")
-        print('Function types:')
+        print("Function types:")
 
         # print all function type in the list
         for a, b in zip(funct_type, range(1, 4)):
-            print(f'\t{b}. {a}')
-        print('\t4. All function types\n\t5. Back')
+            print(f"\t{b}. {a}")
+        print("\t4. All function types\n\t5. Back")
         ftype = input("Choose a function type: ")
         os.system(clear)
 
@@ -269,16 +279,18 @@ def choices(question, solve):
     randomterm = k * x**n
     # sympy can solve an equation
     ans = solve(question)
-    choices = [ans,
-               ans * random.randint(2, 3),
-               rand_ops[opkey()](ans, randomterm),
-               rand_ops[opkey()]((n + 1) * x, ans)]
+    choices = [
+        ans,
+        ans * random.randint(2, 3),
+        rand_ops[opkey()](ans, randomterm),
+        rand_ops[opkey()]((n + 1) * x, ans),
+    ]
     print("\nChoose the letter of the correct answer:\n")
 
     anslist = {}
     for a, b in zip(letter, random.sample(choices, 4)):
         anslist.update({a: b})
-        print(f'{a}.) ')
+        print(f"{a}.) ")
         pprint(b, use_unicode=False)
         print()
 
@@ -288,15 +300,19 @@ def choices(question, solve):
 
     # makes the answer equal to the letter coresponding it
     anss = key[value.index(ans)]
-    u_ans = input("\nType 'back' to return text\nEnter the letter of your answer:  ").lower()
-    while u_ans != 'back':
+    u_ans = input(
+        "\nType 'back' to return text\nEnter the letter of your answer:  "
+    ).lower()
+    while u_ans != "back":
         if u_ans in letter:
             check = answer(ans, anss, u_ans)
             return check
 
         else:
             print("Invalid input!")
-            u_ans = input("\nType 'back' to return text\nEnter the letter of your answer: ").lower()
+            u_ans = input(
+                "\nType 'back' to return text\nEnter the letter of your answer: "
+            ).lower()
     return u_ans
 
 
@@ -321,63 +337,66 @@ def answer(ans, anss, u_ans):
 # calculus is whether to save it to integration score history or differentiation
 def scorerecord(r_or_w, calculus):
     time = datetime.now()
-    count = r_or_w.count('right')
+    count = r_or_w.count("right")
 
     # save score in differentiation score history
     if calculus == Derivative:
         calculus = "Derivative"
-        with open('diff_scores.pickle', 'rb') as p:
+        with open("diff_scores.pickle", "rb") as p:
             diff_total = pickle.load(p)
 
-    # update scores after a user finishes answering
+        # update scores after a user finishes answering
         diff_total.update({f"{time}": f"{count} / {quesnumber[0]}"})
-        with open('diff_scores.pickle', 'wb') as p:
+        with open("diff_scores.pickle", "wb") as p:
             pickle.dump(diff_total, p)
-    # print all score
-        print(f'Test done!\nPress enter to exit.\n{calculus} score history:\n')
+        # print all score
+        print(f"Test done!\nPress enter to exit.\n{calculus} score history:\n")
         for a, b in zip(reversed(diff_total.keys()), reversed(diff_total.values())):
-            print(f'{a} -- Score: {b}')
+            print(f"{a} -- Score: {b}")
         done = input()
 
     # save score in integration score history
     else:
         calculus = "Integral"
-        with open('integ_scores.pickle', 'rb') as p:
+        with open("integ_scores.pickle", "rb") as p:
             integ_total = pickle.load(p)
 
-    # update scores after a user finishes answering
+        # update scores after a user finishes answering
         integ_total.update({f"{time}": f"{count} / {quesnumber[0]}"})
-        with open('integ_scores.pickle', 'wb') as p:
+        with open("integ_scores.pickle", "wb") as p:
             pickle.dump(integ_total, p)
-    # print all score
-        print(f'Test done!\nPress enter to exit.\n{calculus} score history:\n')
+        # print all score
+        print(f"Test done!\nPress enter to exit.\n{calculus} score history:\n")
         for a, b in zip(reversed(integ_total.keys()), reversed(integ_total.values())):
-            print(f'{a} -- Score: {b}')
+            print(f"{a} -- Score: {b}")
         done = input()
 
 
 def settings():
     print("Welcome to settings!")
-    print("1. Clear score history.\n2. Change difficulty.\n3. Change number of questions.\n4. Back")
+    print(
+        "1. Clear score history.\n2. Change difficulty.\n3. Change number of questions.\n4. Back"
+    )
     setting = input("Choose the number of what action you want:  ")
     os.system(clear)
     while setting != "4":
-
         # clear the score history
         if setting == "1":
-            choose = input("Clear history:\n1. Differentiation\n2. Integral\n3. Both\n4. Cancel\nWhat do you want to clear?  ")
+            choose = input(
+                "Clear history:\n1. Differentiation\n2. Integral\n3. Both\n4. Cancel\nWhat do you want to clear?  "
+            )
             os.system(clear)
             while choose != "4":
                 if choose == "1":
                     diff_total = {}
-                    with open('diff_scores.pickle', 'wb') as p:
+                    with open("diff_scores.pickle", "wb") as p:
                         pickle.dump(diff_total, p)
                     back = input("Score history cleared.\nPress enter to back.")
                     os.system(clear)
 
                 elif choose == "2":
                     integ_total = {}
-                    with open('integ_scores.pickle', 'wb') as p:
+                    with open("integ_scores.pickle", "wb") as p:
                         pickle.dump(integ_total, p)
                     back = input("Score history cleared.\nPress enter to back.")
                     os.system(clear)
@@ -385,21 +404,25 @@ def settings():
                 elif choose == "3":
                     diff_total = {}
                     integ_total = {}
-                    with open('diff_scores.pickle', 'wb') as p:
+                    with open("diff_scores.pickle", "wb") as p:
                         pickle.dump(diff_total, p)
-                    with open('integ_scores.pickle', 'wb') as p:
+                    with open("integ_scores.pickle", "wb") as p:
                         pickle.dump(integ_total, p)
                     back = input("Score history cleared.\nPress enter to back.")
                     os.system(clear)
 
                 else:
                     print("Input invalid!")
-                choose = input("Clear history:\n1. Differentiation\n2. Integral\n3. Both\n4. Cancel\nWhat do you want to clear?  ")
+                choose = input(
+                    "Clear history:\n1. Differentiation\n2. Integral\n3. Both\n4. Cancel\nWhat do you want to clear?  "
+                )
                 os.system(clear)
 
         # changing difficulty
         elif setting == "2":
-            print("Change difficulty:\n\t1. Easy\n\t2. Medium (default)\n\t3. Hard\n\t4. Back")
+            print(
+                "Change difficulty:\n\t1. Easy\n\t2. Medium (default)\n\t3. Hard\n\t4. Back"
+            )
             difficult = input("Choose new difficulty: ")
             os.system(clear)
 
@@ -425,18 +448,24 @@ def settings():
                 else:
                     os.system(clear)
                     print("Input invalid.")
-                print("Change difficulty:\n\t1. Easy\n\t2. Medium (default)\n\t3. Hard\n\t4. Back")
+                print(
+                    "Change difficulty:\n\t1. Easy\n\t2. Medium (default)\n\t3. Hard\n\t4. Back"
+                )
                 difficult = input("Choose new difficulty: ")
                 os.system(clear)
 
         # change how many questions
         elif setting == "3":
-            print("Change number of questions\n\t1. 5 items\n\t2. 10 items (default)\n\t3. 15 items\n\t4. 20 items\n\t5. Custom\n\t6. Back")
+            print(
+                "Change number of questions\n\t1. 5 items\n\t2. 10 items (default)\n\t3. 15 items\n\t4. 20 items\n\t5. Custom\n\t6. Back"
+            )
             number = input("Choose how many items you want to answer:  ")
             while not number.isdigit():
                 os.system(clear)
                 print("Input invalid.")
-                print("Change number of questions\n\t1. 5 items\n\t2. 10 items (default)\n\t3. 15 items\n\t4. 20 items\n\t5. Custom\n\t6. Back")
+                print(
+                    "Change number of questions\n\t1. 5 items\n\t2. 10 items (default)\n\t3. 15 items\n\t4. 20 items\n\t5. Custom\n\t6. Back"
+                )
                 number = input("Choose how many items you want to answer:  ")
             quesnumber[0] = int(number) * 5
             print(f"Number of questions successfully changed to {quesnumber[0]} items.")
@@ -447,7 +476,9 @@ def settings():
             print("Input not valid.\n")
 
         print("Welcome to settings!")
-        print("1. Clear score history.\n2. Change difficulty.\n3. Change number of questions.\n4. Back")
+        print(
+            "1. Clear score history.\n2. Change difficulty.\n3. Change number of questions.\n4. Back"
+        )
         setting = input("Choose the number of what action you want:  ")
         os.system(clear)
 
@@ -459,20 +490,24 @@ def viewscores():
     while view != "3":
         if view == "1":
             print("Viewing differentiation score history:")
-            with open('diff_scores.pickle', 'rb') as p:
+            with open("diff_scores.pickle", "rb") as p:
                 diff_total = pickle.load(p)
             print("Press enter to back.")
-            for a, b in zip(reversed(list(diff_total.keys())), reversed(list(diff_total.values()))):
-                print(f'{a} -- Score: {b}')
+            for a, b in zip(
+                reversed(list(diff_total.keys())), reversed(list(diff_total.values()))
+            ):
+                print(f"{a} -- Score: {b}")
             done = input()
             os.system(clear)
         elif view == "2":
             print("Viewing integrtion score history:")
-            with open('integ_scores.pickle', 'rb') as p:
+            with open("integ_scores.pickle", "rb") as p:
                 integ_total = pickle.load(p)
             print("Press enter to back.")
-            for a, b in zip(reversed(list(integ_total.keys())), reversed(list(integ_total.values()))):
-                print(f'{a} -- Score: {b}')
+            for a, b in zip(
+                reversed(list(integ_total.keys())), reversed(list(integ_total.values()))
+            ):
+                print(f"{a} -- Score: {b}")
             done = input()
             os.system(clear)
         else:
@@ -483,7 +518,7 @@ def viewscores():
 
 
 if __name__ == "__main__":
-    x = symbols('x')
+    x = symbols("x")
 
     # with open("diff_scores.pickle", 'wb') as p:
     # pickle.dump(diff_total, p)
@@ -509,7 +544,4 @@ if __name__ == "__main__":
     # dictionary for + and -
     rand_ops = {"+": op.add, "-": op.sub}
 
-    main()
-
-    main()
     main()
